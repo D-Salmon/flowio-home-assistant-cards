@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.2 — 2026-11-04
+
+- Conservation du modèle basé sur les cartes Flow.io HACS.
+- Ajout d’un second modèle qui reproduit fidèlement le dashboard livré avec Flow.io-Waveshare 3.5.1.
+- Les deux modèles proposent les huit mêmes vues et peuvent être importés dans des tableaux de bord distincts afin de comparer les rendus.
+- Le dépôt, la ressource JavaScript et le mécanisme de mise à jour HACS restent inchangés.
+- Détails : [notes de release 0.4.2](docs/releases/v0.4.2.md).
+
 ## 0.4.1 — 2026-11-04
 
 - Retrait de la carte globale introduite en 0.4.0 : le paquet reste composé de cartes individuelles.

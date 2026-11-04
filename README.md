@@ -33,13 +33,16 @@ Ajouter `https://github.com/D-Salmon/flowio-home-assistant-cards` aux dépôts p
 
 Ressource attendue : `/hacsfiles/flowio-home-assistant-cards/flowio-home-assistant-cards.js`, type module JavaScript. Ne pas charger simultanément une ancienne copie manuelle. Voir [installation HACS et manuelle](docs/HACS.md).
 
-## Tableau de bord complet
+## Tableaux de bord complets
 
-HACS installe les cartes individuelles. Le fichier [dashboard-flowio-3.5.1.yaml](examples/dashboard-flowio-3.5.1.yaml) fournit ensuite un véritable tableau de bord Home Assistant avec huit vues séparées : Piscine, Filtration, pH, Désinfection, Oxygène, Équipements, Alarmes et Système.
+HACS installe les cartes individuelles et la release fournit deux modèles complets, chacun composé des huit vues Piscine, Filtration, pH, Désinfection, Oxygène, Équipements, Alarmes et Système :
 
-Avant l’importation, remplacer toutes les occurrences de `entity_prefix: fio` par le préfixe configuré dans le contrôleur, par exemple `entity_prefix: bassin1`. Créer ensuite un nouveau tableau de bord vide dans Home Assistant et coller le contenu du fichier dans son éditeur de configuration brute.
+- [dashboard-flowio-3.5.1.yaml](examples/dashboard-flowio-3.5.1.yaml) utilise les cartes Flow.io installées par ce dépôt HACS ;
+- [dashboard-flowio-3.5.1-original.yaml](examples/dashboard-flowio-3.5.1-original.yaml) est la copie fidèle du dashboard livré avec Flow.io-Waveshare 3.5.1, avec ses cartes Mushroom, card-mod, mini-graph-card et Modern Circular Gauge.
 
-Pour deux contrôleurs, importer le fichier dans deux tableaux de bord distincts avec deux préfixes, par exemple `bassin1` et `bassin2`.
+Créer un nouveau tableau de bord vide dans Home Assistant et coller le modèle choisi dans son éditeur de configuration brute. Pour le modèle HACS, remplacer chaque `entity_prefix: fio`. Pour le modèle original, remplacer le préfixe directement dans les identifiants d’entités, par exemple `sensor.fio_...`, `switch.fio_...` et `number.fio_...`.
+
+Pour comparer les rendus ou utiliser deux contrôleurs, importer les modèles dans des tableaux de bord distincts. HACS ne modifie jamais automatiquement un tableau de bord existant.
 
 ## Synthèse
 

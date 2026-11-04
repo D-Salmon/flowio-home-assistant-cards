@@ -2,7 +2,7 @@
 
 ## Avant publication
 
-La version 0.4.1 conserve les cartes individuelles et joint le tableau de bord complet `examples/dashboard-flowio-3.5.1.yaml`. Modifier `package.json` ou les notes ne constitue pas une release : le bundle doit être vérifié par l’intégration continue avant publication.
+La version 0.4.2 conserve les cartes individuelles et joint deux tableaux de bord complets : le modèle utilisant les cartes HACS et la copie fidèle du dashboard Flow.io-Waveshare 3.5.1. Modifier `package.json` ou les notes ne constitue pas une release : le bundle doit être vérifié par l’intégration continue avant publication.
 
 Voir [la procédure de release](RELEASE.md) : lockfile testé et fusionné, contrôle de l'interface HA, puis workflow stable qui crée uniquement un brouillon. La publication publique est manuelle et distincte.
 
@@ -19,13 +19,15 @@ Le nom du bundle correspond à hacs.json et à l'asset de release. Le téléchar
 
 HACS installe les cartes. Pour créer les vues :
 
-1. Télécharger `dashboard-flowio-3.5.1.yaml` depuis la release ou le dossier `examples`.
-2. Remplacer toutes les occurrences de `entity_prefix: fio` par le préfixe configuré dans le contrôleur.
+1. Télécharger le modèle voulu depuis la release ou le dossier `examples` :
+   - `dashboard-flowio-3.5.1.yaml` pour les cartes Flow.io HACS ;
+   - `dashboard-flowio-3.5.1-original.yaml` pour la copie fidèle du dashboard livré avec la version 3.5.1.
+2. Adapter le préfixe si nécessaire. Le modèle HACS utilise `entity_prefix: fio` ; le modèle original référence directement les identifiants `*.fio_*`.
 3. Créer un nouveau tableau de bord vide dans Home Assistant.
 4. Ouvrir **Modifier le tableau de bord → ⋮ → Éditeur de configuration brute**.
 5. Coller le YAML complet puis enregistrer.
 
-Le fichier crée les vues Piscine, Filtration, pH, Désinfection, Oxygène, Équipements, Alarmes et Système. Pour deux contrôleurs, créer deux tableaux de bord et utiliser deux préfixes distincts, par exemple `bassin1` et `bassin2`. Vérifier la présence des entités et les slots avant toute commande.
+Les deux fichiers créent les vues Piscine, Filtration, pH, Désinfection, Oxygène, Équipements, Alarmes et Système. Pour deux contrôleurs, créer deux tableaux de bord et utiliser deux préfixes distincts, par exemple `bassin1` et `bassin2`. Vérifier la présence des entités et les slots avant toute commande.
 
 ## Installation manuelle
 
