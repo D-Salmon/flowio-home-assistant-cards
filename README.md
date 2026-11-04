@@ -12,6 +12,7 @@ Cartes de supervision et de pilotage pour les entités MQTT du firmware Flow.io-
 
 ## Cartes
 
+- `custom:flowio-dashboard-card` : tableau de bord complet avec un préfixe commun et navigation interne entre Piscine, Filtration, Traitement, Équipements, Sondes, Graphiques, Alarmes et Système.
 - `custom:flowio-header-card` : bandeau compact « état du bassin » avec le statut, une phrase de contexte et les jauges Eau · ORP · Air.
 - `custom:flowio-filtration-card` : plage de filtration calculée (frise, début, fin, durée prévue).
 - `custom:flowio-treatment-card` : informations du traitement actif, adaptées au type configuré (chlore/brome, électrolyse, oxygène actif, désactivé).
@@ -29,9 +30,35 @@ Les cartes reprennent le thème Home Assistant et les motifs visuels Flow.io dé
 
 ## Installation
 
-Après publication d'une release vérifiée, ajouter `ben33880/flowio-home-assistant-cards` aux dépôts personnalisés HACS, catégorie Dashboard. Le dépôt n'est pas ajouté automatiquement au catalogue HACS par défaut.
+Ajouter `https://github.com/D-Salmon/flowio-home-assistant-cards` aux dépôts personnalisés HACS, catégorie **Dashboard**, puis télécharger la dernière version.
 
 Ressource attendue : `/hacsfiles/flowio-home-assistant-cards/flowio-home-assistant-cards.js`, type module JavaScript. Ne pas charger simultanément une ancienne copie manuelle. Voir [installation HACS et manuelle](docs/HACS.md).
+
+## Tableau de bord complet
+
+Après l’installation HACS, ajouter une seule carte **Flow.io Tableau de bord** depuis l’éditeur visuel, ou utiliser :
+
+```yaml
+type: custom:flowio-dashboard-card
+title: Piscine principale
+entity_prefix: bassin1
+tabs:
+  - overview
+  - filtration
+  - treatment
+  - equipment
+  - probes
+  - history
+  - alarms
+  - system
+default_tab: overview
+grid_options:
+  columns: full
+```
+
+Le champ `entity_prefix` doit être identique au « Préfixe des entités Home Assistant » configuré dans Flow.io 3.5.1. Pour deux contrôleurs, ajouter deux instances de la carte avec deux préfixes, par exemple `bassin1` et `bassin2`. Chaque tableau de bord conserve sa navigation et ses entités indépendantes.
+
+Le champ facultatif `mqtt_topic` active les fonctions de maintenance MQTT de la synthèse lorsque le topic racine du contrôleur est connu.
 
 ## Synthèse
 

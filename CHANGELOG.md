@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0 — 2026-11-04
+
+- Ajout de `custom:flowio-dashboard-card`, une carte globale installable par HACS.
+- Navigation interne entre huit espaces : Piscine, Filtration, Traitement, Équipements, Sondes, Graphiques, Alarmes et Système.
+- Préfixe Home Assistant commun à toutes les cartes internes, avec `fio` par défaut et prise en charge de plusieurs contrôleurs (`bassin1`, `bassin2`, etc.).
+- Choix des onglets visibles et de l’onglet initial dans l’éditeur visuel Home Assistant.
+- Conservation du topic MQTT facultatif pour les fonctions de maintenance.
+- Ajout de tests de normalisation multi-bassins et de navigation.
+- Détails : [notes de release 0.4.0](docs/releases/v0.4.0.md).
+
 ## 0.3.5 — en préparation
 
 - Adaptation au contrat Home Assistant du firmware Flow.io-Waveshare 3.5.1 pour la plage de filtration calculée.
