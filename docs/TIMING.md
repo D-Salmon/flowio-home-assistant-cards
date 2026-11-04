@@ -1,0 +1,17 @@
+# Horaires et durées
+
+Ajouter à display.timing les éléments voulus : filtration_schedule, filtration_runtime, ph_runtime, disinfection_runtime. Une liste vide masque ce groupe ; elle est vide par défaut. Aucun compteur ne dépend de l'affichage d'une pompe.
+
+filtration_schedule lit sensor.<prefix>_pl_flt_start et sensor.<prefix>_pl_flt_stop, en heures, pour afficher une plage calculée comme 08:00 → 20:00. C'est une fenêtre prévue par Flow.io, pas un journal des périodes réellement parcourues. Les durées comptabilisées sont séparées.
+
+À partir du firmware 3.5.1, le capteur `sensor.<prefix>_pl_flt_start` publie également `requested_minutes`, `scheduled_minutes` et `limited_by_schedule`. La durée programmée est utilisée pour tracer la frise. `scheduled_minutes: 1440` représente une filtration continue et remplit toute la frise, même si les deux horaires publiés valent 00:00. Lorsque `limited_by_schedule` est vrai, la carte indique les durées demandée et programmée. Si ces attributs sont absents ou invalides, la durée est calculée à partir des deux horaires comme auparavant.
+
+Avec le firmware 3.5.1, les compteurs journaliers utilisent en priorité les entités métier `sensor.<prefix>_pd_flt_upt_mn`, `sensor.<prefix>_pd_ph_pmp_upt`, `sensor.<prefix>_pd_chl_pmp_upt` ou `sensor.<prefix>_pd_chl_gen_upt` selon le traitement actif. Les unités `s`, `min`, `mn` et `h` sont normalisées pour l’affichage. Si ces entités sont absentes, la carte se replie sur `sensor.<prefix>_data_<144 + slot>` ; `runtime_slots` définit alors filtration=0, pH=1 et désinfection=2 par défaut. Le pH et la désinfection représentent le temps de marche des équipements choisis, pas une plage continue ni le temps d'action du produit dans l'eau.
+
+Les valeurs source sont en secondes. La carte les formate en h/min/s, conserve zéro réel et distingue absence, indisponibilité et valeur invalide. Une unité explicite autre que s est signalée, sans conversion supposée. Les sources sélectionnées sont incluses dans le diagnostic.
+
+Les actions `reset_filtration`, `reset_ph` et `reset_disinfection`, si elles sont sélectionnées dans `display.operations`, apparaissent dans « Horaires & durées », à droite du type correspondant (Filtration, Pompe pH ou Désinfection). L’icône native Home Assistant porte une infobulle et un nom accessible. La durée correspondante est automatiquement ajoutée à l’affichage si elle n’est pas déjà dans `display.timing`; cela n’active ni ne modifie un réglage firmware. L’action est désactivée si le bouton firmware manque ou est indisponible et demande confirmation avant l’appel à `button.press`. Elle peut être affichée même si la valeur du compteur est absente.
+
+Les temps journaliers sont désactivés par défaut dans la diffusion HA du catalogue firmware. Activer les valeurs correspondant aux slots souhaités dans Diffusion des données, enregistrer puis redémarrer le contrôleur. Une donnée non annoncée n'est pas remplacée par zéro. Le frontend ne modifie pas cette configuration.
+
+Les couleurs et valeurs illustratives des tests ne sont pas celles de votre piscine. Les valeurs de durée restent consultables en lecture seule : les toucher ouvre leur dialogue HA. Seules les icônes de remise à zéro explicitement sélectionnées envoient une commande firmware après confirmation ; aucun clic sur une valeur ou sur la frise ne commande une pompe. Les tests ajoutés doivent repasser la CI.
