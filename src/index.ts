@@ -10,4 +10,3 @@ import './flowio-override-card';
 import './flowio-graph-card';
 import './flowio-pool-card';
 import './flowio-history-card';
-import './flowio-dashboard-card';

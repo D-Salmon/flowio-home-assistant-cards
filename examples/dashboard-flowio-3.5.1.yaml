@@ -1,0 +1,227 @@
+# Tableau de bord Flow.io-Waveshare 3.5.1.
+# Remplacer toutes les occurrences de `entity_prefix: fio` par le préfixe
+# configuré dans le contrôleur avant d'importer ce fichier dans Home Assistant.
+title: Flow.io 3.5.1
+views:
+  - title: Piscine
+    path: piscine
+    icon: mdi:pool
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: custom:flowio-pool-card
+            title: Piscine
+            entity_prefix: fio
+            grid_options:
+              columns: full
+
+  - title: Filtration
+    path: filtration
+    icon: mdi:filter-variant
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: custom:flowio-filtration-card
+            title: Filtration
+            entity_prefix: fio
+            grid_options:
+              columns: full
+          - type: custom:flowio-pool-card
+            title: Pilotage de la filtration
+            entity_prefix: fio
+            grid_options:
+              columns: full
+            display:
+              measurements: [water_temperature, pressure]
+              injections: []
+              setpoints: []
+              equipment: [filtration]
+              modes: [filtration_auto, winter]
+              tanks: []
+              information: []
+              timing: [filtration_schedule, filtration_runtime]
+              calculated_values: []
+              device_metrics: []
+              values_telemetry: false
+              operations: [reset_filtration, timed_override]
+          - type: custom:flowio-history-card
+            title: Historique filtration
+            entity_prefix: fio
+            hours_to_show: 24
+            measurements: [water_temperature, pressure]
+            calculated_values: []
+            grid_options:
+              columns: full
+
+  - title: pH
+    path: ph
+    icon: mdi:flask-outline
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: custom:flowio-pool-card
+            title: Régulation pH
+            entity_prefix: fio
+            grid_options:
+              columns: full
+            display:
+              measurements: [ph]
+              injections: [ph_injected]
+              setpoints: [ph_setpoint]
+              equipment: [ph_pump]
+              modes: [regulation_enabled, ph_auto, ph_dose_plus]
+              tanks: [ph_tank_percent]
+              information: []
+              timing: [ph_runtime]
+              calculated_values: []
+              device_metrics: []
+              values_telemetry: false
+              operations: [refill_ph, reset_ph]
+          - type: custom:flowio-history-card
+            title: Historique pH
+            entity_prefix: fio
+            hours_to_show: 24
+            measurements: [ph]
+            calculated_values: []
+            grid_options:
+              columns: full
+
+  - title: Désinfection
+    path: desinfection
+    icon: mdi:test-tube
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: custom:flowio-treatment-card
+            entity_prefix: fio
+            grid_options:
+              columns: full
+          - type: custom:flowio-pool-card
+            title: Désinfection
+            entity_prefix: fio
+            grid_options:
+              columns: full
+            display:
+              measurements: [orp]
+              injections: [disinfection_injected]
+              setpoints: [orp_setpoint]
+              equipment: [disinfection_pump]
+              modes: [regulation_enabled, disinfection_auto, disinfection_type, swg_control]
+              tanks: [disinfection_tank_percent]
+              information: [treatment_type]
+              timing: [disinfection_runtime]
+              calculated_values: []
+              device_metrics: []
+              values_telemetry: false
+              operations: [refill_disinfection, reset_disinfection]
+          - type: custom:flowio-history-card
+            title: Historique ORP
+            entity_prefix: fio
+            hours_to_show: 24
+            measurements: [orp]
+            calculated_values: []
+            grid_options:
+              columns: full
+
+  - title: Oxygène
+    path: oxygene
+    icon: mdi:water-outline
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: custom:flowio-treatment-card
+            entity_prefix: fio
+            grid_options:
+              columns: full
+          - type: custom:flowio-pool-card
+            title: Oxygène actif
+            entity_prefix: fio
+            grid_options:
+              columns: full
+            display:
+              measurements: [water_temperature]
+              injections: [disinfection_injected]
+              setpoints: []
+              equipment: [disinfection_pump]
+              modes: [disinfection_type, o2_temp_comp]
+              tanks: [disinfection_tank_percent]
+              information: [treatment_type]
+              timing: [disinfection_runtime]
+              calculated_values: []
+              device_metrics: []
+              values_telemetry: false
+              operations: [refill_disinfection, reset_disinfection]
+
+  - title: Équipements
+    path: equipements
+    icon: mdi:toggle-switch-outline
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: custom:flowio-pool-card
+            title: Équipements et modes
+            entity_prefix: fio
+            grid_options:
+              columns: full
+            display:
+              measurements: []
+              injections: []
+              setpoints: []
+              equipment: [filtration, ph_pump, disinfection_pump, heater, robot, lighting, filling]
+              modes: [filtration_auto, winter, regulation_enabled, ph_auto, disinfection_auto, heater_auto, disinfection_type, swg_control, ph_dose_plus, o2_temp_comp]
+              tanks: []
+              information: []
+              timing: []
+              calculated_values: []
+              device_metrics: []
+              values_telemetry: false
+              operations: [timed_override]
+
+  - title: Alarmes
+    path: alarmes
+    icon: mdi:bell-alert-outline
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: custom:flowio-alarms-card
+            title: Alarmes
+            entity_prefix: fio
+            grid_options:
+              columns: full
+
+  - title: Système
+    path: systeme
+    icon: mdi:chip
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: custom:flowio-status-card
+            title: État du contrôleur
+            entity_prefix: fio
+            items: [wifi_ip, wifi_mac, wifi_rssi, sys_upt_mn, sys_hp_free, sys_hp_min_free, sys_hp_frag, voltage, current]
+            grid_options:
+              columns: full

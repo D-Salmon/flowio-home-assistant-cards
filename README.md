@@ -12,7 +12,6 @@ Cartes de supervision et de pilotage pour les entités MQTT du firmware Flow.io-
 
 ## Cartes
 
-- `custom:flowio-dashboard-card` : tableau de bord complet avec un préfixe commun et navigation interne entre Piscine, Filtration, Traitement, Équipements, Sondes, Graphiques, Alarmes et Système.
 - `custom:flowio-header-card` : bandeau compact « état du bassin » avec le statut, une phrase de contexte et les jauges Eau · ORP · Air.
 - `custom:flowio-filtration-card` : plage de filtration calculée (frise, début, fin, durée prévue).
 - `custom:flowio-treatment-card` : informations du traitement actif, adaptées au type configuré (chlore/brome, électrolyse, oxygène actif, désactivé).
@@ -36,29 +35,11 @@ Ressource attendue : `/hacsfiles/flowio-home-assistant-cards/flowio-home-assista
 
 ## Tableau de bord complet
 
-Après l’installation HACS, ajouter une seule carte **Flow.io Tableau de bord** depuis l’éditeur visuel, ou utiliser :
+HACS installe les cartes individuelles. Le fichier [dashboard-flowio-3.5.1.yaml](examples/dashboard-flowio-3.5.1.yaml) fournit ensuite un véritable tableau de bord Home Assistant avec huit vues séparées : Piscine, Filtration, pH, Désinfection, Oxygène, Équipements, Alarmes et Système.
 
-```yaml
-type: custom:flowio-dashboard-card
-title: Piscine principale
-entity_prefix: bassin1
-tabs:
-  - overview
-  - filtration
-  - treatment
-  - equipment
-  - probes
-  - history
-  - alarms
-  - system
-default_tab: overview
-grid_options:
-  columns: full
-```
+Avant l’importation, remplacer toutes les occurrences de `entity_prefix: fio` par le préfixe configuré dans le contrôleur, par exemple `entity_prefix: bassin1`. Créer ensuite un nouveau tableau de bord vide dans Home Assistant et coller le contenu du fichier dans son éditeur de configuration brute.
 
-Le champ `entity_prefix` doit être identique au « Préfixe des entités Home Assistant » configuré dans Flow.io 3.5.1. Pour deux contrôleurs, ajouter deux instances de la carte avec deux préfixes, par exemple `bassin1` et `bassin2`. Chaque tableau de bord conserve sa navigation et ses entités indépendantes.
-
-Le champ facultatif `mqtt_topic` active les fonctions de maintenance MQTT de la synthèse lorsque le topic racine du contrôleur est connu.
+Pour deux contrôleurs, importer le fichier dans deux tableaux de bord distincts avec deux préfixes, par exemple `bassin1` et `bassin2`.
 
 ## Synthèse
 

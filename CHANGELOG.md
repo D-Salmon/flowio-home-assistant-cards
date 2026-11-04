@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.1 — 2026-11-04
+
+- Retrait de la carte globale introduite en 0.4.0 : le paquet reste composé de cartes individuelles.
+- Ajout d’un tableau de bord YAML complet avec huit vraies vues Home Assistant : Piscine, Filtration, pH, Désinfection, Oxygène, Équipements, Alarmes et Système.
+- Toutes les vues utilisent les cartes adaptées au firmware Flow.io-Waveshare 3.5.1.
+- Le préfixe se personnalise avant importation en remplaçant `entity_prefix: fio` dans le fichier.
+- Le même dépôt HACS et la même ressource JavaScript sont conservés pour permettre une mise à jour directe depuis Home Assistant.
+- Détails : [notes de release 0.4.1](docs/releases/v0.4.1.md).
+
 ## 0.4.0 — 2026-11-04
 
 - Ajout de `custom:flowio-dashboard-card`, une carte globale installable par HACS.
